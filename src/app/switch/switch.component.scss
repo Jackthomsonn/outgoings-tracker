@@ -1,0 +1,26 @@
+:host {
+  background: rgba(226, 66, 105, 0.1);
+  width: 35px;
+  min-width: 35px;
+  height: 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  
+  & > i {
+    background: rgba(156, 66, 105, 1);
+    border-radius: 100%;
+    font-size: .8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-3px) translateX(-5px);
+    color: rgba(255, 255, 255, 0.9);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    
+    &.complete {
+      transform: translateY(-3px) translateX(20px);
+    }
+  }
+}

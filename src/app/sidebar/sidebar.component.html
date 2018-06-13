@@ -1,0 +1,22 @@
+<div>
+  <div class='payments'>{{ payments?.length }}</div>
+  <p>Outgoings</p>
+</div>
+<div>
+  <div class='stats'>
+    <p>
+      Monthly wage <input type='number' [(ngModel)]="monthlyEarnings" [placeholder]="monthlyEarnings" />
+    </p>
+    <p>
+      <span>{{ getCompletedPayments() }}</span> Payments made</p>
+    <p>Your payments this month
+      <span>{{ getTotalMonthlyOutgoings()?.price | currency: '£' }}</span>
+    </p>
+    <p>Money left over
+      <span>{{ getMoneyLeftOver() | currency: '£' }}</span>
+    </p>
+    <p>Weekly Expenditure
+      <span>{{ getMoneyLeftOver() / 4 | currency: '£' }}</span>
+    </p>
+  </div>
+</div>
