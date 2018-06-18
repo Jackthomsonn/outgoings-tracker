@@ -45,7 +45,9 @@ export class TrackerComponent implements OnInit {
 
   private sortPaymentsByDateAsc = (payments: any) => {
     return payments.sort(((a, b) => {
-      return (<any>new Date(a.date.split('-').splice(1).toString())) - (<any>new Date(b.date.split('-').splice(1).toString()))
+      if (a.date && b.date) {
+        return (<any>new Date(a.date.split('-').splice(1).toString())) - (<any>new Date(b.date.split('-').splice(1).toString()))
+      }
     }))
   }
 
