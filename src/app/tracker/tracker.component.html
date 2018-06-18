@@ -1,6 +1,7 @@
 <div class='item' *ngFor='let payment of payments'>
   <span [ngClass]="{complete: payment.complete}">{{ payment?.name }}</span>
   <span [ngClass]="{complete: payment.complete}">{{ payment?.price | currency: '£' }}</span>
+  <span [ngClass]="{complete: payment.complete}">{{ payment?.date | date: 'dd MMMM' }}</span>
   <app-switch (click)="toggle(payment)" [complete]="payment.complete"></app-switch>
   <i class='material-icons' (click)='removeExpense(payment)'>close</i>
 </div>
@@ -8,5 +9,6 @@
 <div class='expense-add'>
   <input type='text' [(ngModel)]='newExpense.name' placeholder='Expense Name'>
   <input type='number' [(ngModel)]='newExpense.price' placeholder='Expense Price'>
+  <input type='date' [(ngModel)]='newExpense.date' placeholder='Expense Date'>
   <button [disabled]="!newExpense.name || !newExpense.price" (click)='addExpense()'>Add expense</button>
 </div>

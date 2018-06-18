@@ -9,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 
 export class TrackerComponent implements OnInit {
   public payments: Array<any> = []
+
   public newExpense = {
     name: undefined,
-    price: 0
+    price: 0,
+    date: new Date()
   }
 
   constructor(private paymentsService: PaymentsService) { }
@@ -21,6 +23,7 @@ export class TrackerComponent implements OnInit {
       'outgoingsTracker',
       JSON.stringify(this.payments)
     )
+    this.sortPaymentsByDateAsc(this.payments)
   }
 
   public toggle = payment => {
@@ -30,7 +33,7 @@ export class TrackerComponent implements OnInit {
 
   public addExpense = () => {
     this.paymentsService.payments.next(this.payments.concat(this.newExpense))
-    this.newExpense = { name: undefined, price: 0 }
+    this.newExpense = { name: undefined, price: 0, date: undefined }
     this.save()
   }
 
@@ -40,9 +43,15 @@ export class TrackerComponent implements OnInit {
     this.save()
   }
 
+  private sortPaymentsByDateAsc = (payments: any) => {
+    return payments.sort(((a, b) => {
+      return (<any>new Date(a.date.split('-').splice(1).toString())) - (<any>new Date(b.date.split('-').splice(1).toString()))
+    }))
+  }
+
   ngOnInit() {
     this.paymentsService.payments.subscribe(payments => {
-      this.payments = payments;
+      this.payments = this.sortPaymentsByDateAsc(payments);
     })
   }
 }
