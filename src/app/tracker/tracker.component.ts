@@ -46,9 +46,16 @@ export class TrackerComponent implements OnInit {
   private sortPaymentsByDateAsc = (payments: any) => {
     return payments.sort(((a, b) => {
       if (a.date && b.date) {
-        return (<any>new Date(a.date.split('-').splice(1).toString())) - (<any>new Date(b.date.split('-').splice(1).toString()))
+        return a.date - b.date
       }
     }))
+  }
+
+  private getGetOrdinal = (n) => {
+    const s = ['th', 'st', 'nd', 'rd'];
+    const v = n % 100;
+
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
   }
 
   ngOnInit() {
